@@ -92,12 +92,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-      POSTGRES_PORT: "5433"
     networks:
       - backend
     ports:
       - "5433:5433"
-
+    command: postgres -p 5433  
 networks:
   backend:
     driver: bridge
