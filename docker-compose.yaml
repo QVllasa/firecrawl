@@ -66,19 +66,6 @@ services:
     ports:
       - "${PORT:-3002}:${INTERNAL_PORT:-3002}"
     command: node dist/src/harness.js --start-docker
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=coolify"
-      - "traefik.http.routers.firecrawl.rule=Host(`firecrawl.webqube.de`)"
-      - "traefik.http.routers.firecrawl.entrypoints=http,https"
-      - "traefik.http.routers.firecrawl.tls=true"
-      - "traefik.http.routers.firecrawl.tls.certresolver=letsencrypt"
-      - "traefik.http.services.firecrawl.loadbalancer.server.port=3002"
-      # HTTP to HTTPS redirect
-      - "traefik.http.middlewares.firecrawl-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.firecrawl-http.rule=Host(`firecrawl.webqube.de`)"
-      - "traefik.http.routers.firecrawl-http.entrypoints=http"
-      - "traefik.http.routers.firecrawl-http.middlewares=firecrawl-redirect"
 
   redis:
     image: redis:alpine
